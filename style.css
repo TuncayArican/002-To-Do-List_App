@@ -2,8 +2,8 @@
     margin: 0px;
     padding: 0px;
 }
-body,
-img{
+body
+{
     background-color: aquamarine;
 }
 #to_do{
@@ -25,21 +25,15 @@ img{
 #task_list{
     text-align: center;
 }
-#h1,#second_line{
+#h1{
     display: none;
 }
-.second_line{
-    margin: auto;
-    width:55%;
-    background-color: brown;
-    padding: 1rem 0 px;
-    border: 1px solid;
-}
- .confirm2{
+
+.remove1{
     padding: 0.2rem;
 }
 
- .to_do2{
+.to_do2{
     border: 1px solid grey;
     padding: 1rem;
     width: 50%;
