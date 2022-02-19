@@ -1,32 +1,50 @@
-let to_do1=document.getElementById("to_do1");
-let confirm1=document.getElementById("confirm1");
-let h1=document.getElementById("h1");
-let task_list=document.getElementById("task_list");
-
-
-
-confirm1.addEventListener("click", ()=>{
-    h1.style.display="block"
-    let to_do2=document.createElement("span");
-    let remove1=document.createElement("button");
-    to_do2.setAttribute("class", "to_do2");
-    remove1.setAttribute("class", "remove1");
-    to_do2.innerText=to_do1.value;
-    to_do1.value=""
-    remove1.innerText="X"
-    task_list.append(to_do2);
-    task_list.append(remove1);
-    to_do2.addEventListener("click", ()=>{
-        to_do2.style.textDecorationLine="line-through";
-        to_do2.style.textDecorationColor="red";
-
-    }) 
-    remove1.addEventListener("click", ()=>{
-        remove1.style.display="none";
-        to_do2.style.display="none";
-    }) 
+const inputText=document.querySelector("#task");
+const button=document.querySelector(".add-btn");
+const form=document.querySelector("#add-task");
+const ul=document.querySelector(".todolist-list-container");
+// functions
+const createTask=(taskText)=>{
+    return `
+    <div class="list-group">
+                    <li class="unchecked">${taskText}</li>
+                    <button class="btn">&#128473;</i></button>
+                </div>
+                `
+}
+const completedTaskCount=()=>{
+    let checkedCount=ul.getElementsByClassName("checked").length;
+    let taskCount=ul.getElementsByClassName("list-group").length;
+    console.log(checkedCount,taskCount);
+    const checkedTasks=document.getElementById("checkedTasks");
+    const allTasks=document.getElementById("allTasks");
+    checkedTasks.innerText=checkedCount;
+    allTasks.innerText=taskCount;
+}
+//events
+//add task event
+button.addEventListener("click",e=>{
+    e.preventDefault();
+    if(inputText.value){
+    ul.innerHTML+=createTask(inputText.value);
+    form.reset();
+    }else{
+        alert("Please select a task");
+    }
+    completedTaskCount();
 })
-
-
-
-
+// delete task
+ul.addEventListener("click",e=>{
+    if(e.target.classList.contains("btn")){
+        e.target.parentElement.remove();
+    }
+    completedTaskCount();
+})
+//check & uncheck Task
+ul.addEventListener("click", e=>{
+    if(e.target.classList.contains("unchecked")){
+        e.target.className="checked";
+    }else{
+        e.target.className="unchecked";
+    }
+    completedTaskCount();
+})
